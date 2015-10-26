@@ -38,6 +38,7 @@ public class PizzaList extends HttpServlet {
 
 		response.setContentType("text/html"); 
 		PrintWriter out = response.getWriter();
+		String extra = request.getParameter("extra");
 		out.println(docType +"<h1> WELCOME TO CHECKER'S </h1>");
 		try{
 		    Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -56,7 +57,7 @@ public class PizzaList extends HttpServlet {
 		// Create select statement and execute it
 		
 		try{
-		    String selectSQL = "select * from pizzas";
+		    String selectSQL = "select * from pizzas where toppings like '%" + extra + "%'";
 		    Statement stmt = conn.createStatement();
 		    ResultSet rs1 = stmt.executeQuery(selectSQL);
 		    // Retrieve the results
